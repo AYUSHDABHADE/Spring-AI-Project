@@ -63,5 +63,8 @@ public class ChatServiceImpl implements ChatService {
 	            .stream()
 	            .content();
 	}
+	 public void gitCheckCode() {
+    	 System.out.println("Git check code");
+     }
 
 }
