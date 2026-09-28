@@ -13,15 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ai.entity.Tut;
 import com.ai.service.ChatService;
 
+import reactor.core.publisher.Flux;
+
 @RestController
 public class ChatController {
 
 	private ChatService chatService;
-//	private ChatClient client;
 
-//	public ChatController(ChatClient.Builder builder) {
-//		  this.client=builder.build();
-//	}
 	public ChatController(ChatService service) {
 		this.chatService = service;
 	}
@@ -31,6 +29,19 @@ public class ChatController {
 		System.err.println("Call is comeing in rest api");
 
 		var responce = chatService.chat(q);
+		System.err.println(responce);
 		return ResponseEntity.ok(responce);
 	}
+	
+	@GetMapping("/stream-chat")
+	public ResponseEntity<Flux<String>> streamChat(@RequestParam(value ="q", required = true) String query){
+		return ResponseEntity.ok(this.chatService.stramChat(query));
+	}
+	
+	
+	
+	
+	
+	
+
 }
